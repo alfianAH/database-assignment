@@ -1,6 +1,6 @@
 <?php
 $course = "Basis Data 2";
-$title = "Evaluation Plan";
+$title = "Prinsip Kerja Pemrosesan Query dalam Basis Data";
 $writer = "Alfian Aldy Hamdani - D121181001";
 
 
