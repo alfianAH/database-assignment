@@ -1,3 +1,8 @@
+<!-- 
+bagaimana mengukur biaya sebuah query
+bagaimana sebuah sistem db mengevaluasi sebuah ekspresi
+bagaimana sebuah sistem db mengevaluasi multiple ekspresi
+ -->
 <html>
     <head>
         <title>Prinsip Kerja Pemrosesan Query dalam Basis Data</title>
@@ -21,19 +26,46 @@
         <main>
             <div id="content">
                 <article id="opening" class="card">
-                    <p>Opening</p>
+                    <p>Pemrosesan Query atau biasa disebut dengan <i>Query Processing</i> adalah suatu pemrosesan mengubah high level query (seperti SQL) menjadi low level language atau bahasa mesin. Terdapat tiga langkah dalam melakukan pemrosesan query, yaitu parsing dan translasi, optimisasi, dan evaluasi. Mari kita melihatnya satu per satu.</p>
 
                     <h2 id="contents">Table of Contents</h2>
                     <ul>
-                        <li><a href="#">Content 1</a></li>
-                        <li><a href="#">Content 2</a></li>
+                        <li><a href="#query-processing"><i>Query Processing</i></a></li>
+                        <li><a href="#query-cost">Mengukur Biaya Query</a></li>
                         <li><a href="#">Content 3</a></li>
                     </ul>
                 </article>
 
+                <article id="query-processing" class="card">
+                    <h2><i>Query Processing</i></h2>
+
+                    <figure>
+                        <img src="../assets/images/steps of query processing.PNG" alt="Query Processing" title="Steps of Query Processing">
+                        <figcaption>Step dari pemrosesan query</figcaption>
+                    </figure>
+                    
+                    <p>Seperti yang dikatakan pada awal tadi, langkah-langkah pemrosesan query secara terurut adalah parsing dan translasi, optimisasi, dan evaluasi. Jika melihat gambar di atas, berikut penjelasan detail mengenai langkah-langkahnya: </p>
+                    <ol>
+                        <li>Dapat dilihat bahwa query (high-level query, contohnya SQL) akan ditranslasikan ke query output (low-level language). Pada tahap pertama, query akan ditranslasikan ke <i>internal form</i>. Guna parse adalah untuk mengecek syntax dan memverifikasi relasi.</li>
+
+                        <li>Hasil dari parser dan translasi adalah ekspresi aljabar-relasional.</li>
+
+                        <li>Selanjutnya ekspresi aljabar relasional akan dikirim ke optimizer untuk meningkatkan kemampuan query dengan memilih query terbaik. Dalam memilih query terbaik, optimizer dengan bantuan statistik data akan melihat statistik query terbaik.</li>
+
+                        <li>Setelah query dioptimisasi dan dipilih query terbaik, maka langkah selanjutnya adalah menaruhnya di <i>execution plan</i>.</li>
+
+                        <li>Selanjutnya <i>execution plan</i> akan dikirimkan ke <i>evaluation engine</i>. Di <i>evaluation engine</i> akan mengambil plan atau rencana terbaik lalu akan menghasilkan hasilnya yaitu query output.</li>
+                    </ol>
+                </article>
+
+                <article id="query-cost" class="card">
+                    <h2>Mengukur Biaya Query</h2>
+                    <p></p>
+                </article>
+
                 <article id="" class="card">
-                    <h2>Title</h2>
-                    <p>Body</p>
+                    <h2></h2>
+                    <p></p>
                 </article>
             </div>
 
