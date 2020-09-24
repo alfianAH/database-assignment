@@ -1,8 +1,3 @@
-<!-- 
-bagaimana mengukur biaya sebuah query
-bagaimana sebuah sistem db mengevaluasi sebuah ekspresi
-bagaimana sebuah sistem db mengevaluasi multiple ekspresi
- -->
 <html>
     <head>
         <title>Prinsip Kerja Pemrosesan Query dalam Basis Data</title>
@@ -32,7 +27,7 @@ bagaimana sebuah sistem db mengevaluasi multiple ekspresi
                     <ul>
                         <li><a href="#query-processing"><i>Query Processing</i></a></li>
                         <li><a href="#query-cost">Mengukur Biaya Query</a></li>
-                        <li><a href="#">Content 3</a></li>
+                        <li><a href="#expression-evaluation">Bagaimana Sistem Database Mengevaluasi Ekspresi?</a></li>
                     </ul>
                 </article>
 
@@ -76,9 +71,16 @@ bagaimana sebuah sistem db mengevaluasi multiple ekspresi
                     <p>Dengan rumus di atas, maka kita dapat menghitung biaya query.</p>
                 </article>
 
-                <article id="" class="card">
-                    <h2></h2>
-                    <p></p>
+                <article id="expression-evaluation" class="card">
+                    <h2>Bagaimana Sistem Database Mengevaluasi Ekspresi?</h2>
+                    <p> Dalam mengevaluasi sebuah ekspresi dan juga multiple ekspresi, kami mempertimbangkan pendekatan materialization dan pendekatan pipelining. Kita akan melihat bahwa pendekatan ini berbeda.
+
+                    <ol>
+                        <li><i>Materialization</i> menampung hasil operasi menggunakan tabel temporer (dimaterialkan) yang kemudian digunakan untuk evaluasi level berikutnya. Materialization tidak memiliki persyaratan yang lebih tinggi untuk buffer memori untuk evaluasi query. Biaya keseluruhan sudah termasuk biaya operasional ditambah biaya pembacaan dan penulisan hasil pada penyimpanan sementara. Materialization juga tidak ada trashing, maka performanya masih lebih baik. Namun, kurang efisien karena membutuhkan waktu untuk menghasilkan hasil query.</li>
+
+                        <li><i>Pipeline</i> mengganti tabel temporer dengan suatu <i>pipeline</i> operasi (berupa buffer). Penggunaan <i>pipeline</i> akan menghilangkan biaya pembacaan dan penulisan tabel-tabel temporer. <i>Pipelining</i> merupakan cara evaluasi query yang lebih efisien karena menghasilkan hasil dengan cepat. Ini mengoptimalkan biaya evaluasi query, karena belum termasuk biaya baca tulis maka penyimpanan sementara. Namun, kinerjanya menjadi buruk jika terjadi trashing.</li>
+                    </ol> 
+                    </p>
                 </article>
             </div>
 
