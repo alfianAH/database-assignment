@@ -1,11 +1,3 @@
-<!-- 
-Cari tahu cara menampilkan 'evaluation plan' untuk salah satu sistem basis data berikut dan jelaskan hasilnya. Pilih salah satu:
-
-    MySQL
-    PostgreSQL
-    SQL Server
-    Oracle
- -->
 <html>
     <head>
         <title>Evaluation Plan</title>
@@ -52,6 +44,65 @@ Cari tahu cara menampilkan 'evaluation plan' untuk salah satu sistem basis data 
                     </ul>
 
                     <p>Rencana evaluasi mirip dengan peta jalan. Ini menjelaskan langkah-langkah yang diperlukan untuk menilai proses dan hasil program. Rencana evaluasi yang efektif lebih dari sekadar kolom indikator yang ditambahkan ke rencana kerja program Anda.</p>
+                </article>
+
+                <article id="mysql-evaluation" class="card">
+                    <h2>Evaluation Plan di MySQL</h2>
+
+                    <figure>
+                        <img src="../assets/images/mysql-evaluation.png" alt="Evaluation plan in MySQL" title="Evaluation plan in MySQL">
+                        <figcaption>Contoh evaluation plan di MySQL</figcaption>
+                    </figure>
+                    
+                    <p>Cara melihat evaluation plan di MySQL adalah dengan menambahkan <code>EXPLAIN</code> pada query. Berikut keterangan dari isi tabel di atas:</p>
+
+                    <ol type="1">
+                        <li>Id: nomor urut yang menunjukkan di mana tabel pesanan digabungkan</li>
+
+                        <li>Select_type: menunjukkan tipe select yang digunakan
+                            <ol type="a">
+                                <li>Select yang kedua (id = 2) mempunyai tipe MATERIALIZED. Artinya, ini akan dieksekusi dan hasilnya akan disimpan di tabel sementari dengan sebuah key unik di semua kolom. Key unik ada untuk mencegah tabel dari berisi hasil duplikat</li>
+                            </ol>
+                        </li>
+
+                        <li>Table: nama tabel</li>
+
+                        <li>Type: menunjukkan bagaimana baris ditemukan dari tabel.Type untuk query di atas adalah ALL dan ref. 
+                            <ol type="a">
+                                <li>ALL: suatu tabel discan secara keseluruhan. ALL tidak bagus digunakan jika isi tabel banyak dan tabel digabung dengan tabel sebelumnya.</li>
+
+                                <li>Index: Scan penuh atas indeks yang digunakan. Lebih baik daripada ALL tetapi masih buruk jika indeks besar dan tabel bergabung dengan tabel sebelumnya.</li>
+                            </ol>
+                        </li>
+
+                        <li>Possible_keys: key dalam tabel yang bisa digunakan untuk menemukan baris dalam tabel.</li>
+
+                        <li>Key: nama key yang digunakan untuk mengambil baris. NULL bearti tidak ada kunci yang digunakan.</li>
+
+                        <li>Key_len: menunjukkan berapa banyak byte yang key gunakan. (menunjukkan hasil jika hanya menggunakan bagian dari kunci multi-kolom)</li>
+
+                        <li>Ref: referensi yang digunakan sebagai nilai kunci.</li>
+
+                        <li>Rows: perkiraan berapa banyak yang akan kita temukan di tabel untuk setiap pencarian kunci</li>
+
+                        <li>Extra: informasi ekstra tentang join. Bagian ini menghasilkan satu atau lebih value yang dipisahkan ‘;’. Value yang dihasilkan adalah: 
+                            <ol type="a">
+                                <li>Using where: WHERE (sebagai tambahan pada kemungkinan pencarian kunci) digunakan untuk memeriksa apakah baris harus diterima. Jika anda tidak memiliki ‘using where’ bersama dengan tipe gabungan ALL, ada kemungkinan melakukan sesuatu yang salah.</li>
+
+                                <li>Using index: Hanya indeks yang digunakan untuk mengambil informasi yang diperlukan dari tabel. Tidak perlu untuk melakukan pencarian tambahan untuk mengambil hasil yang sebenarnya.</li>
+
+                                <li>Terdapat 1 jenis lagi yang tidak terdapat pada gambar, yaitu Not exist. Not exist: Hentikan pencarian lebih banyak baris jika menemukan satu baris yang cocok. Pengoptimalan ini digunakan dengan <code>LEFT JOIN</code> di mana seseorang secara eksplisit mencari baris yang tidak ada di <code>LEFT JOIN TABLE</code>. Contoh:
+<pre><code>SELECT * 
+FROM t1 
+LEFT JOIN t2 on (…) 
+WHERE t2.not_null_column is NULL</code></pre>
+                                Karena t2.not_null_column hanya bisa NULL jika tidak ada baris yang cocok dengan syarat, kita bisa berhenti mencari jika kita menemukan satu baris yang cocok.
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+
+                    <p>Dari tabel <code>EXPLAIN</code>, semakin banyak jumlah baris yang dicari, semakin baik tingkat optimasi mengenai indeks dan ketepatan query perlu untuk memaksimalkan kinerja. Kolom Extra menunjukkan kemungkinan tindakan yang dapat difokuskan untuk meningkatkan query jika berlaku.</p>
                 </article>
             </div>
 
