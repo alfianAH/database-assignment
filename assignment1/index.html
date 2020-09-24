@@ -60,7 +60,20 @@ bagaimana sebuah sistem db mengevaluasi multiple ekspresi
 
                 <article id="query-cost" class="card">
                     <h2>Mengukur Biaya Query</h2>
-                    <p></p>
+
+                    <p>Untuk mengkonversikan query ke query yang diinginkan, kita butuh mengukur biaya query untuk memilih query terbaik. Query dapat diukur dengan cara melihat <i>disk accesses</i>, <i>CPU cycles</i>, <i>transist time in network</i>.</p>
+
+                    <p>Karena biaya CPU susah dihitung, maka yang dihitung adalah <i>disk accesses</i>. Lalu bagaimana cara menghitung <i>disk accesses</i>? Yaitu dengan cara melihat banyak percobaan untuk melakukan pencarian (<i>seeks</i>), banyak block yang dibaca, dan banyak block yang ditulis.Biasanya, biaya untuk menulis selalu lebih besar daripada biaya untuk membaca.</p>
+
+                    <p>Rumus:
+                        <ul>
+                            <li>Waktu untuk mentrasnfer 1 block dari disk: t<sub>t</sub></li>
+                            <li>Waktu untuk 1 <i>seeks</i>: t<sub>s</sub></li>
+                        </ul>
+                        Jadi biaya untuk mentransfer b blok dan s <i>seeks</i> = b * t<sub>t</sub> + s * t<sub>s</sub>.
+                    </p>
+
+                    <p>Dengan rumus di atas, maka kita dapat menghitung biaya query.</p>
                 </article>
 
                 <article id="" class="card">
@@ -78,7 +91,7 @@ bagaimana sebuah sistem db mengevaluasi multiple ekspresi
         </main>
 
         <footer>
-            <p><?php echo($course); ?></p>
+            <p>Basis Data 2</p>
         </footer>
 
     </body>
