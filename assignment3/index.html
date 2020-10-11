@@ -28,8 +28,7 @@
                     <h2 id="contents">Table of Contents</h2>
                     <ul>
                         <li><a href="#database-lifecycle">Siklus Hidup Pengembangan Basis Data</a></li>
-                        <li><a href="#">Content 2</a></li>
-                        <li><a href="#">Content 3</a></li>
+                        <li><a href="#database-design-process">Proses Desain Basis Data</a></li>
                     </ul>
                 </article>
 
@@ -43,7 +42,89 @@
                     <p>Siklus hidup pengembangan database memiliki sejumlah tahapan yang diikuti saat mengembangkan sistem database. Langkah-langkah dalam siklus hidup pembangunan tidak harus diikuti secara religius secara berurutan. Pada sistem database kecil, siklus hidup pengembangan sistem database biasanya sangat sederhana dan tidak melibatkan banyak langkah. Untuk mengapresiasi sepenuhnya diagram di atas, mari kita lihat masing-masing komponen yang terdaftar di setiap langkah.</p>
                 </article>
 
-                
+                <article id="database-design-process" class="card">
+                    <h2>Proses Desain Basis Data</h2>
+                    <p>Terdapat beberapa proses yang harus dibuat untuk mendesain suatu basis data. Berikut proses-prosesnya: </p>
+
+                    <ol>
+                        <li>Pengumpulan Data dan Analisis Requirement
+                            <p>Step pertama yang dilakukan ini yaitu analisis requirement. Akan dilakukan dulu analisis mengenai database yang mau dibuat, bagaimana requirement user viewnya ? dan juga bagaimana data tersebut bisa diakses?. Dalam manajemen requirements ini, ada 2 pendekatan yang bisa dipilih, yaitu terpusat dan view integration. Pendekatan terpusat yaitu dimana kebutuhan dari setiap user view digabung menjadi serangkaian kebutuhan tunggal dari aplikasi basis data. Sedangkan pendekatan integration yaitu dimana kebutuhan dari setiap user view digunakan untuk membuat model data terpisah untuk merepresentasikan user view tersebut. </p>
+                        </li>
+
+                        <li>Desain Konseptual
+                            <figure>
+                                <img src="../assets/images/entity-relationship.png" alt="Entity Relationship" title="Entity Relationship">
+                                <figcaption>Siklus Hidup Pengembangan Basis Data</figcaption>
+                            </figure>
+                            <p>Selanjutnya adalah bagaimana membuat sebuah hubungan antar entitas. Untuk dapat merancangan basis data yang baik dan sesuai kebutuhan, pertama-tama kita perlu mempelajari terlebih dahulu apa itu Entity Relationship Diagram(ERD) dan ada apa saja didalamnya. Karena tanpa rancangan ERD yang baik, maka struktur data dari sistem yang kita gunakan mungkin saja akan sulit untuk dikembangkan lebih lanjut atau justru tidak memenuhi kebutuhan dari sistem tersebut.</p>
+
+                            <p>ERD adalah teknik yang digunakan untuk memodelkan kebutuhan data dari sebuah sistem. umumnya ini digunakan untuk menjelaskan hubungan antar entitas atau tabel yang ada pada basis data agar dapat diketahui hubungan data dan mendapatkan informasi yang dibutuhkan. Untuk memahami ERD lebih lanjut, kita akan memahami lebih lanjut tentang tiga komponen utama dari ERD yaitu, Entitas, Atribut dan Relasi.</p>
+
+                            <ol type="i">
+                                <li>Entitas
+                                    <p>Apa sih Entitas adalah representasi dari suatu objek yang dapat dibedakan antar entitasnya. umumnya digambarkan sebagai tabel yang memiliki data yang berbeda antar tabel. Contoh dari entitas adalah tabel Mahasiswa, tabel Buku dan tabel Pelajaran. setiap entitas memiliki tipe data dan bentukan data yang berbeda-beda dan menjadikan setiap entitas dapat dibedakan berdasarkan jenisnya. Umumnya entitas dilambangkan dengan simbol persegi panjang.</p>
+                                </li>
+
+                                <li>Atribut
+                                    <p>Atribut merupakan bagian dari entitas yang menjadi pembeda antar tabel. dimana setiap atribut mewakili setiap data yang ada pada entitas tersebut. Umumnya atribut dilambangkan dengan bentuk lingkaran elips.</p>
+
+                                    <ol type="a">
+                                        <li>Atribut Key</li>
+                                        <p>Atribut yang bersifat unik dan dapat menjadi pembeda antar data. Atribut dimaksud unik adalah data tersebut tidak akan memiliki duplikasi. contoh : NIK pada data kependudukan. </p>
+                                        
+                                        <li>Atribut Simple</li>
+                                        <p>Atribut yang bersifat atomic atau atribut yang tidak dapat dipecah lagi. Maksud dari tidak bisa dipecah lagi adalah atribut tersebut sudah menjadi bentuk data yang paling kecil. contoh : Alamat, Nama Depan, Nama Belakang</p>
+
+                                        <li>Atribut Multivalue</li>
+                                        <p>Atribut yang memiliki nilai lebih dari satu pada satu atribut. Contohnya adalah nama beberapa pengarang dalam satu buku.</p>
+
+                                        <li>Atribut Composit</li>
+                                        <p>Atribut yang dapat dipecah menjadi atribut yang lebih kecil lagi. Contohnya adalah atribut nama yang dapat dipecah menjadi atribut nama depan, nama tengah dan nama belakang.</p>
+
+                                        <li>Atribut Derivatif</li>
+                                        <p>Atribut data yang merupakan hasil olahan dari data yang ada dan tidak wajib untuk ada pada basis data.</p>
+                                    </ol>
+                                </li>
+
+                                <li>Relasi
+                                    <p>Relasi adalah berupa hubungan antar entitas yang memiliki keterikatan antar data seperti hubungan antara entitas yang bertindak sebagai parent dan juga entitas yang membutuhkan data dari entitas parent dan berperan sebagai entitas anak atau turunan. Contoh relasi adalah entitas 'Buku' terhadap entitas 'Penerbit', dimana satu penerbit dapat menerbitkan banyak buku dan satu buku mungkin hanya akan diterbitkan oleh satu penerbit atau lebih. Hubungan tersebut yang dijelaskan dengan adanya relasi antar entitas untuk menjelaskan batasan relasi dan hubungan data antar entitas tersebut. Umumnya relasi dilambangkan dengan sebuah diamond. Terdapat tiga jenis relasi yang dapat terjadi antar tabel pada basis data yaitu:</p>
+
+                                    <ol type="a">
+                                        <li>one to one
+                                            <p>Hubungan satu ke satu adalah hubungan antar tabel yang memiliki hubungan yang memastikan jika data pada tabel satu bertambah, maka data pada tabel satunya juga akan bertambah. Contoh penggunaan relasi 1 ke satu adalah satu data user akan memiliki hubungan satu ke satu ke data profil dimana satu user hanya dapat memiliki satu profil data.</p>
+                                        </li>
+
+                                        <li>one to many
+                                            <p>Hubungan satu ke banyak adalah hubungan antar tabel yang memiliki hubungan seperti parent dan child, dimana satu orang tua, dapat memiliki banyak anak. Sedangkan satu anak hanya dapat memiliki satu orang tua.</p>
+                                        </li>
+
+                                        <li>many to many
+                                            <p>Hubungan banyak ke banyak adalah hubungan yang cukup diharapkan tidak terlalu banyak digunakan. Karena dapat menyebabkan kesalahan data atau data yang ambigu. sehingga umumnya jika terdapat hubungan banyak ke banyak antar tabel. Maka akan dibuatkan satu tabel turunan yang akan menjadi perantara antar tabel tersebut sehingga antar tabel tersebut akan menjadi hubungan satu ke satu atau satu ke banyak. Hal ini penting untuk menghindari data yang bertumpuk dan akan menyulitkan dikemudian hari.</p>
+                                        </li>
+                                    </ol>
+                                </li>
+                            </ol>
+                        </li>
+
+                        <li>Pemilihan DBMS
+                            <p>Langkah-langkah dalam memilih database yaitu dimulai dari melihat-lihat dulu informasi terkait DBMS dari referensi yang ada. Kedua, buat daftar 2 atau beberapa produk kemudian lakukan evaluasi. Yang terakhir buat sebuah rekomendasi laporannya terkait DBMS itu. </p>
+                        </li>
+
+                        <li>Model Logika
+                            <p>Tahap ini berkaitan dengan pengembangan model database berdasarkan persyaratan. Seluruh desain di atas kertas tanpa implementasi fisik atau pertimbangan DBMS khusus.</p>
+                        </li>
+
+                        <li>Model fisik
+                            <p>Tahap ini mengimplementasikan model logis dari database dengan mempertimbangkan DBMS dan faktor implementasi fisik.</p>
+                        </li>
+
+                        <li>Desain Aplikasi dan Keamanan
+                            <p>Di tahap terakhir ini, harus dipertimbangkan bagaimana aspek aplikasi yang berada di luar database sehingga mempersiapkan sistem dengan keamanan yang baik. Misalnya, sistem DBMSnya di enkripsi</p>
+                        </li>
+                    </ol>
+
+                    <p>Sekian proses-proses desain basis data.</p>
+                </article>
             </div>
 
             <aside>
