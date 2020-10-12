@@ -21,18 +21,29 @@
         <main>
             <div id="content">
                 <article id="opening" class="card">
-                    <p>Pembukaan</p>
+                    <p>Transaction atau biasa disebut dengan transaksi adalah unit eksekusi program yang mengakses dan mungkin memperbarui berbagai item data.</p>
 
                     <h2 id="contents">Table of Contents</h2>
                     <ul>
-                        <li><a href="#">Content 1</a></li>
+                        <li><a href="#acid">Properti ACID</a></li>
                         <li><a href="#">Content 2</a></li>
                     </ul>
                 </article>
 
-                <article id="evaluation-plan" class="card">
-                    <h2></h2>
-                    <p></p>
+                <article id="acid" class="card">
+                    <h2>Properti ACID</h2>
+                    <p>Apa sih itu ACID? ACID merupakan kepanjangan dari <i>Atomicity, Consistency, Isolation, Durability</i>. Dalam menjaga integritas data, sistem basis data harus memastikan keempat properti ACID ini. Berikut penjelasan detail mengenai ACID:</p>
+
+                    <ol type="1">
+                        <li><i>Atomicity</i>: Baik semua operasi transaksi tercermin dengan benar dalam basis data atau tidak ada sama sekali.
+                        </li>
+
+                        <li><i>Consistency</i>: Eksekusi transaksi dalam isolasi menjaga konsistensi basis data</li>
+
+                        <li><i>Isolation</i>: Meskipun beberapa transaksi dapat dieksekusi secara bersamaan, setiap transaksi harus tidak mengetahui transaksi lain yang dijalankan secara bersamaan. Hasil transaksi perantara harus disembunyikan dari transaksi lain yang dilakukan secara bersamaan. Artinya, untuk setiap pasangan transaksi T<sub>i</sub> dan T<sub>j</sub>, tampak bagi T<sub>i</sub> bahwa T<sub>j</sub>, eksekusi selesai sebelum T<sub>i</sub> dimulai, atau T<sub>j</sub> mulai eksekusi setelah T<sub>i</sub> selesai.</li>
+
+                        <li><i>Durability</i>: Setelah transaksi berhasil diselesaikan, perubahan yang telah dibuat ke basis data tetap ada, bahkan jika ada kegagalan sistem.</li>
+                    </ol>
                 </article>
             </div>
 
