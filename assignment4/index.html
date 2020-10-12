@@ -26,7 +26,7 @@
                     <h2 id="contents">Table of Contents</h2>
                     <ul>
                         <li><a href="#acid">Properti ACID</a></li>
-                        <li><a href="#">Content 2</a></li>
+                        <li><a href="#transaction-example">Contoh Kasus Transactions</a></li>
                     </ul>
                 </article>
 
@@ -43,6 +43,52 @@
                         <li><i>Isolation</i>: Meskipun beberapa transaksi dapat dieksekusi secara bersamaan, setiap transaksi harus tidak mengetahui transaksi lain yang dijalankan secara bersamaan. Hasil transaksi perantara harus disembunyikan dari transaksi lain yang dilakukan secara bersamaan. Artinya, untuk setiap pasangan transaksi T<sub>i</sub> dan T<sub>j</sub>, tampak bagi T<sub>i</sub> bahwa T<sub>j</sub>, eksekusi selesai sebelum T<sub>i</sub> dimulai, atau T<sub>j</sub> mulai eksekusi setelah T<sub>i</sub> selesai.</li>
 
                         <li><i>Durability</i>: Setelah transaksi berhasil diselesaikan, perubahan yang telah dibuat ke basis data tetap ada, bahkan jika ada kegagalan sistem.</li>
+                    </ol>
+                </article>
+
+                <article id="transaction-example" class="card">
+                    <h2>Contoh Kasus Transactions</h2>
+                    <p>Contoh kasus yang diambil adalah si A ingin membeli makanan di sebuah rumah makan sebesar Rp. 10.000,-. Dan ia ingin membayar menggunakan via OVO yang disediakan oleh rumah makan. Berikut adalah proses transaksinya: </p>
+                    <ol>
+                        <code>
+                        <li>read(saldo_A)</li>
+                        <li>saldo_A := saldo_A - 10.000</li>
+                        <li>write(saldo_A)</li>
+                        <li>read(saldo_rumah_makan)</li>
+                        <li>saldo_rumah_makan := saldo_rumah_makan + 10.000</li>
+                        <li>write(saldo_rumah_makan)</li>
+                        </code>
+                    </ol>
+
+                    <p>Berikut adalah penjelasan properti ACID yang terjadi pada proses transaksi di atas.</p>
+
+                    <ol>
+                        <li><i>Atomicity requirement</i>
+                            <p>Jika transaksi gagal setelah step 3 dan sebelum langkah 6, uang akan "hilang" uang mengarah ke status database yang tidak konsisten. Sistem harus memastikan bahwa pembaruan dari transaksi yang dijalankan sebagian tidak tercermin dalam database.</p>
+                        </li>
+
+                        <li><i>Consistency requirement</i>
+                            <p>Secara umum, persyaratan konsistensi meliputi:</p>
+                            <ol type="i">
+                                <li>Batasan integritas yang ditentukan secara eksplisit seperti primary key dan foreign key</li>
+                                
+                                <li>Batasan integritas implisit. Misalnya, jumlah saldo semua akun, dikurangi jumlah pinjaman harus sama dengan nilai tunai di tangan.</li>
+
+                                <li>Transaksi harus melihat database yang konsisten</li>
+
+                                <li>Selama eksekusi transaksi, database mungkin untuk sementara tidak konsisten.</li>
+
+                                <li>Ketika transaksi berhasil diselesaikan, database harus konsisten.</li>
+                            </ol>
+                        </li>
+
+                        <li><i>Isolation requirement</i>
+                            <p>Jika antara langkah 3 dan 6, transaksi lain T2 diizinkan untuk mengakses database yang diperbaharui sebagian, database akan terlihat tidak konsisten. Isolasi dapat dilakukan dengan menjalankan transaksi secara serial (satu demi satu)</p>
+                        </li>
+
+                        <li><i>Durability requirement</i>
+                            <p>Setelah si A diberi tahu bahwa transaksi telah selesai (yaitu membayar Rp. 10.000,- telah dilakukan), pembaruan ke database oleh transaksi harus tetap ada meskipun ada kegagalan.</p>
+                        </li>
                     </ol>
                 </article>
             </div>
